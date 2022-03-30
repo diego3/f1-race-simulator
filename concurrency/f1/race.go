@@ -9,6 +9,8 @@ import (
 	"sort"
 	"strings"
 	"time"
+
+	"github.com/TwiN/go-color"
 )
 
 func init() {
@@ -17,6 +19,13 @@ func init() {
 
 var compounds = createTyresCompounds()
 
+/*
+Race States:
+ RUNNING
+ SAFETY_CAR
+ VIRTUAL_SAFETY_CAR
+ YELLOW_FLAG
+*/
 func RaceStart() {
 	drivers := createDrivers()
 	mapSum := make(map[string]time.Duration)
@@ -36,7 +45,8 @@ func RaceStart() {
 		command.Stdout = os.Stdout
 		command.Run()
 
-		fmt.Printf("Grand Prix: %s\tLap %d\n", grandPrixName, lap)
+		msg1 := fmt.Sprintf("Grand Prix: %s\tLap %d\n", grandPrixName, lap)
+		fmt.Print(color.InBold(msg1))
 
 		times := simulateLapTime(lap, drivers)
 		// sum current time position for each drive in this lap
@@ -75,7 +85,7 @@ func RaceStart() {
 			fmt.Printf("%d %s\tTyre:%s(%d)\tDiff: %.3f\tTime: %.3f\n",
 				pos+1,
 				driverLap.driver.Name,
-				driverLap.driver.Tyres.Counpond,
+				color.Colorize(driverLap.driver.Tyres.Color, driverLap.driver.Tyres.Counpond),
 				driverLap.driver.Tyres.Age,
 				diff.Seconds(),
 				driverLap.time.Seconds())
@@ -112,7 +122,10 @@ func simulateLapTime(currentLap int, drivers []*Driver) []DriverTime {
 		}
 		randTime := random(driver.Min+tyreTime+pitStopTime, driver.Max+tyreTime+pitStopTime)
 		randDuration, _ := time.ParseDuration(fmt.Sprintf("%dms", randTime))
+
 		// todo: simulate driver error. Example: rand % 13 = 0
+		// todo: simulate driver crash and safety car
+
 		times = append(times, DriverTime{driver: driver, time: randDuration})
 	}
 
@@ -124,42 +137,6 @@ func simulateLapTime(currentLap int, drivers []*Driver) []DriverTime {
 	return times
 }
 
-func createDrivers() []*Driver {
-	var drivers []*Driver
-
-	hamilton := NewDriver("HAM", 997, 1250) // 253
-	hamilton.Tyres = compounds[0]
-	hamilton.PitStop1 = PitStop{Lap: 20, Tyre: compounds[1]}
-
-	verstappen := NewDriver("VER", 998, 1245) // 247
-	verstappen.Tyres = compounds[0]
-	verstappen.PitStop1 = PitStop{Lap: 15, Tyre: compounds[0]}
-	verstappen.PitStop2 = PitStop{Lap: 30, Tyre: compounds[1]}
-
-	drivers = append(drivers, hamilton)
-	drivers = append(drivers, verstappen)
-	drivers = append(drivers, NewDriver("LEC", 999, 1700))
-	drivers = append(drivers, NewDriver("SAI", 1010, 1810))
-	drivers = append(drivers, NewDriver("RUS", 1200, 1850))
-	drivers = append(drivers, NewDriver("PER", 1100, 1650))
-	drivers = append(drivers, NewDriver("NOR", 1110, 1660))
-	drivers = append(drivers, NewDriver("RIC", 1055, 1750))
-	drivers = append(drivers, NewDriver("ALO", 1255, 1500))
-	drivers = append(drivers, NewDriver("OCO", 1200, 1450))
-	drivers = append(drivers, NewDriver("BOT", 1200, 1500)) //300 var
-	drivers = append(drivers, NewDriver("ZOU", 1300, 1650)) //350 var
-	drivers = append(drivers, NewDriver("MAG", 1215, 1750))
-	drivers = append(drivers, NewDriver("MIC", 1565, 1890))
-	drivers = append(drivers, NewDriver("ALB", 1225, 1400))
-	drivers = append(drivers, NewDriver("LAT", 1400, 1500))
-	drivers = append(drivers, NewDriver("GAS", 1100, 1500))
-	drivers = append(drivers, NewDriver("TIS", 1400, 1800))
-	drivers = append(drivers, NewDriver("STR", 1544, 1900))
-	drivers = append(drivers, NewDriver("HUL", 1600, 1800))
-
-	return drivers
-}
-
 func getDriverByName(drivers []*Driver, name string) (*Driver, error) {
 	for _, driver := range drivers {
 		if strings.Compare(driver.Name, name) == 0 {
@@ -167,66 +144,4 @@ func getDriverByName(drivers []*Driver, name string) (*Driver, error) {
 		}
 	}
 	return nil, errors.New("driver not found")
-}
-
-func createTyresCompounds() map[int]Tyre {
-	tyreMap := make(map[int]Tyre)
-	tyreMap[0] = Tyre{Counpond: "Soft", Grip: 30, Age: 0}
-	tyreMap[1] = Tyre{Counpond: "Medium", Grip: 50, Age: 0}
-	tyreMap[2] = Tyre{Counpond: "Hard", Grip: 100, Age: 0}
-	return tyreMap
-}
-
-type DriverTime struct {
-	driver *Driver
-	time   time.Duration
-}
-
-type DriverSum struct {
-	driver *Driver
-	time   time.Duration
-}
-
-type LapManager struct {
-	Laps []DriverTime
-}
-
-func (lm *LapManager) Add(laps []DriverTime) {
-
-}
-
-type Driver struct {
-	Name     string
-	Min      int
-	Max      int
-	Tyres    Tyre
-	PitStop1 PitStop
-	PitStop2 PitStop
-	PitStop3 PitStop
-	Sum      time.Duration
-}
-
-func NewDriver(name string, min, max int) *Driver {
-	return &Driver{
-		Name:     name,
-		Min:      min,
-		Max:      max,
-		Tyres:    compounds[random(1, 3)-1],
-		PitStop1: PitStop{Lap: random(20, 30), Tyre: compounds[random(1, 3)-1]},
-	}
-}
-
-type Tyre struct {
-	Counpond string
-	Grip     int
-	Age      int
-}
-
-type PitStop struct {
-	Lap  int
-	Tyre Tyre
-}
-
-func random(min, max int) int {
-	return rand.Intn(max-min+1) + min
 }
