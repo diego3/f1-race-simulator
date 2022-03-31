@@ -55,10 +55,6 @@ func scanInput() string {
 }
 
 func Menu() {
-	// select grand prix
-	// continue champ
-	// new champ
-	//var selected int
 	menus := createMenus()
 	var exit bool = false
 	for {

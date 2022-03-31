@@ -36,8 +36,8 @@ func NewDriver(name string, min, max int) *Driver {
 		Name:     name,
 		Min:      min,
 		Max:      max,
-		Tyres:    compounds[random(1, 3)-1],
-		PitStop1: PitStop{Lap: random(20, 30), Tyre: compounds[random(1, 3)-1]},
+		Tyres:    compounds[Random(1, 3)-1],
+		PitStop1: PitStop{Lap: Random(20, 30), Tyre: compounds[Random(1, 3)-1]},
 	}
 }
 

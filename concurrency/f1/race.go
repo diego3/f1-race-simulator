@@ -61,7 +61,7 @@ func RaceStart() {
 		fmt.Print(color.InBold(msg1))
 
 		times := simulateLapTime(lap, drivers)
-		go writeJson(fmt.Sprintf("data/lap-%d.json", lap), times)
+		go WriteJson(fmt.Sprintf("data/lap-%d.json", lap), times)
 
 		// sum current time position for each drive in this lap
 		for _, driverLap := range times {
@@ -124,17 +124,17 @@ func simulateLapTime(currentLap int, drivers []*Driver) []DriverTime {
 		driver.Tyres.Age++
 
 		if driver.PitStop1.Lap == currentLap {
-			pitStopTime = random(22500, 25000) // 2,5 sec to 5 sec
+			pitStopTime = Random(22500, 25000) // 2,5 sec to 5 sec
 			driver.Tyres = driver.PitStop1.Tyre
 		}
 		if driver.PitStop2.Lap == currentLap {
-			pitStopTime = random(22500, 25000) // 2,5 sec to 5 sec
+			pitStopTime = Random(22500, 25000) // 2,5 sec to 5 sec
 			driver.Tyres = driver.PitStop2.Tyre
 		}
 		if driver.Tyres.Grip > 0 {
 			tyreTime = driver.Tyres.Age * driver.Tyres.Grip
 		}
-		randTime := random(driver.Min+tyreTime+pitStopTime, driver.Max+tyreTime+pitStopTime)
+		randTime := Random(driver.Min+tyreTime+pitStopTime, driver.Max+tyreTime+pitStopTime)
 		randDuration, _ := time.ParseDuration(fmt.Sprintf("%dms", randTime))
 
 		// todo: simulate driver error. Example: rand % 13 = 0

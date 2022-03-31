@@ -1,12 +1,10 @@
-package f1
+package v2
 
-import "github.com/TwiN/go-color"
+import (
+	"github.com/TwiN/go-color"
+)
 
-const SOFT_COMPOUND = 0
-const MEDIUM_COMPOUND = 1
-const HARD_COMPOUND = 2
-
-const MONACO_GRAND_PRIX = "MONACO"
+var compounds = createTyresCompounds()
 
 func createDrivers() []*Driver {
 	var drivers []*Driver
@@ -16,16 +14,15 @@ func createDrivers() []*Driver {
 	hamilton.PitStop1 = PitStop{Lap: 20, Tyre: compounds[MEDIUM_COMPOUND]}
 
 	verstappen := NewDriver("VER", 998, 1245) // 247
-	verstappen.Tyres = compounds[SOFT_COMPOUND]
-	verstappen.PitStop1 = PitStop{Lap: 15, Tyre: compounds[SOFT_COMPOUND]}
-	verstappen.PitStop2 = PitStop{Lap: 30, Tyre: compounds[MEDIUM_COMPOUND]}
+	verstappen.Tyres = compounds[HARD_COMPOUND]
+	verstappen.PitStop1 = PitStop{Lap: 35, Tyre: compounds[SOFT_COMPOUND]}
 
 	drivers = append(drivers, hamilton)
 	drivers = append(drivers, verstappen)
 	drivers = append(drivers, NewDriver("LEC", 999, 1350))
 	drivers = append(drivers, NewDriver("SAI", 1010, 1810))
 	drivers = append(drivers, NewDriver("RUS", 1200, 1850))
-	drivers = append(drivers, NewDriver("PER", 1100, 1650))
+	drivers = append(drivers, NewDriver("PER", 1000, 1550))
 	drivers = append(drivers, NewDriver("NOR", 1110, 1660))
 	drivers = append(drivers, NewDriver("RIC", 1055, 1750))
 	drivers = append(drivers, NewDriver("ALO", 1255, 1500))
@@ -46,30 +43,8 @@ func createDrivers() []*Driver {
 
 func createTyresCompounds() map[int]Tyre {
 	tyreMap := make(map[int]Tyre)
-	tyreMap[SOFT_COMPOUND] = Tyre{Counpond: "Soft", Grip: 30, Age: 0, Color: color.Red}
-	tyreMap[MEDIUM_COMPOUND] = Tyre{Counpond: "Medium", Grip: 50, Age: 0, Color: color.Yellow}
-	tyreMap[HARD_COMPOUND] = Tyre{Counpond: "Hard", Grip: 100, Age: 0, Color: color.Bold}
+	tyreMap[SOFT_COMPOUND] = Tyre{Compound: "Soft", Grip: 15, Age: 0, Color: color.Red}
+	tyreMap[MEDIUM_COMPOUND] = Tyre{Compound: "Medium", Grip: 25, Age: 0, Color: color.Yellow}
+	tyreMap[HARD_COMPOUND] = Tyre{Compound: "Hard", Grip: 50, Age: 0, Color: color.Bold}
 	return tyreMap
-}
-
-func createRace(name string) *Race {
-	prixMap := make(map[string]*Race)
-
-	dryType := Random(1, 2)
-	var conditions []WeatherCondition
-	cond1 := WeatherCondition{Temperature: Random(19, 40), ChangeLap: 0}
-	cond2 := WeatherCondition{Temperature: Random(15, 30), ChangeLap: Random(30, 71)}
-	conditions = append(conditions, cond1)
-	conditions = append(conditions, cond2)
-
-	monaco := &Race{
-		Name:              "Mônaco",
-		Laps:              71,
-		WeatherConditions: conditions,
-		Weather:           dryType,
-	}
-
-	prixMap[MONACO_GRAND_PRIX] = monaco
-
-	return prixMap[name]
 }

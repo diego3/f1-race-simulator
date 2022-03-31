@@ -1,14 +1,21 @@
 package main
 
 import (
-	"github.com/diego3/golang-handson/concurrency/f1"
+	"math/rand"
+	"time"
+
+	v2 "github.com/diego3/golang-handson/concurrency/f1/v2"
 )
 
-//"github.com/diego3/golang-handson/concurrency/f1"
-//"github.com/diego3/golang-handson/concurrency/tennis"
+func init() {
+	rand.Seed(time.Now().Unix())
+}
 
 func main() {
+	game := v2.Game{}
+	game.Boot()
+	game.GameLoop()
 	//tennis.Tennis()
-	f1.RaceStart()
+	//f1.RaceStart()
 	//ui.Menu()
 }
