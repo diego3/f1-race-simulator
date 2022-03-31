@@ -20,13 +20,9 @@ func createDrivers() []*Driver {
 	verstappen.PitStop1 = PitStop{Lap: 15, Tyre: compounds[SOFT_COMPOUND]}
 	verstappen.PitStop2 = PitStop{Lap: 30, Tyre: compounds[MEDIUM_COMPOUND]}
 
-	leclerc := NewDriver("LEC", 999, 1350)
-	leclerc.Tyres = compounds[SOFT_COMPOUND]
-	leclerc.PitStop1 = PitStop{Lap: -1, Tyre: compounds[SOFT_COMPOUND]}
-
 	drivers = append(drivers, hamilton)
 	drivers = append(drivers, verstappen)
-	drivers = append(drivers, leclerc)
+	drivers = append(drivers, NewDriver("LEC", 999, 1350))
 	drivers = append(drivers, NewDriver("SAI", 1010, 1810))
 	drivers = append(drivers, NewDriver("RUS", 1200, 1850))
 	drivers = append(drivers, NewDriver("PER", 1100, 1650))
@@ -56,16 +52,22 @@ func createTyresCompounds() map[int]Tyre {
 	return tyreMap
 }
 
-func createGrandPrix(name string) *GrandPrix {
-	prixMap := make(map[string]*GrandPrix)
+func createRace(name string) *Race {
+	prixMap := make(map[string]*Race)
 
+	dryType := random(1, 2)
 	var conditions []WeatherCondition
 	cond1 := WeatherCondition{Temperature: random(19, 40), ChangeLap: 0}
 	cond2 := WeatherCondition{Temperature: random(15, 30), ChangeLap: random(30, 71)}
 	conditions = append(conditions, cond1)
 	conditions = append(conditions, cond2)
 
-	monaco := &GrandPrix{Name: "Mônaco", Laps: 71, WeatherConditions: conditions}
+	monaco := &Race{
+		Name:              "Mônaco",
+		Laps:              71,
+		WeatherConditions: conditions,
+		Weather:           dryType,
+	}
 
 	prixMap[MONACO_GRAND_PRIX] = monaco
 

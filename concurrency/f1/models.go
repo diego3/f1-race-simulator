@@ -3,8 +3,8 @@ package f1
 import "time"
 
 type DriverTime struct {
-	driver *Driver
-	time   time.Duration
+	Driver *Driver
+	Time   time.Duration
 }
 
 type DriverSum struct {
@@ -53,10 +53,30 @@ type PitStop struct {
 	Tyre Tyre
 }
 
-type GrandPrix struct {
+const DRY = 1
+const WET = 2
+
+type GrandPrixWeekend struct {
+	Qualify1 Qualifying
+	Qualify2 Qualifying
+	Qualify3 Qualifying
+	Race     Race
+}
+
+type Qualifying struct {
+	Pass              int
+	DriversPass       []Driver
+	DriversNotPass    []Driver
+	Sequence          int
+	Weather           int
+	WeatherConditions []WeatherCondition
+}
+
+type Race struct {
 	Name              string
 	Laps              int
 	WeatherConditions []WeatherCondition
+	Weather           int
 }
 
 type WeatherCondition struct {

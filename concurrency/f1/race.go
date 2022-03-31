@@ -20,11 +20,23 @@ func init() {
 var compounds = createTyresCompounds()
 
 /*
+Game States:
+	MENU
+	Q1
+	Q2
+	Q3
+	RACE
+
 Race States:
  RUNNING
  SAFETY_CAR
  VIRTUAL_SAFETY_CAR
  YELLOW_FLAG
+
+Allow send game commands:
+    switch to plan B
+	box box!
+
 */
 func RaceStart() {
 	drivers := createDrivers()
@@ -49,11 +61,13 @@ func RaceStart() {
 		fmt.Print(color.InBold(msg1))
 
 		times := simulateLapTime(lap, drivers)
+		go writeJson(fmt.Sprintf("data/lap-%d.json", lap), times)
+
 		// sum current time position for each drive in this lap
 		for _, driverLap := range times {
-			currentDur := driverLap.time
-			duration := mapSum[driverLap.driver.Name]
-			mapSum[driverLap.driver.Name] = duration + currentDur
+			currentDur := driverLap.Time
+			duration := mapSum[driverLap.Driver.Name]
+			mapSum[driverLap.Driver.Name] = duration + currentDur
 		}
 
 		var driversSum []DriverSum
@@ -126,12 +140,12 @@ func simulateLapTime(currentLap int, drivers []*Driver) []DriverTime {
 		// todo: simulate driver error. Example: rand % 13 = 0
 		// todo: simulate driver crash and safety car
 
-		times = append(times, DriverTime{driver: driver, time: randDuration})
+		times = append(times, DriverTime{Driver: driver, Time: randDuration})
 	}
 
 	// fastest driver in this lap
 	sort.Slice(times, func(i, j int) bool {
-		return times[i].time.Microseconds() < times[j].time.Microseconds()
+		return times[i].Time.Microseconds() < times[j].Time.Microseconds()
 	})
 
 	return times
