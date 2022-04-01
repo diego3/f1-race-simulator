@@ -15,7 +15,4 @@ func main() {
 	game := v2.Game{}
 	game.Boot()
 	game.GameLoop()
-	//tennis.Tennis()
-	//f1.RaceStart()
-	//ui.Menu()
 }

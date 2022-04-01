@@ -17,6 +17,8 @@ type Driver struct {
 	PitStop2       PitStop
 	PitStop3       PitStop
 	PrevDriver     *Driver
+	MinCalculated  int
+	MaxCalculated  int
 }
 
 func NewDriver(name string, min, max int) *Driver {
@@ -31,6 +33,15 @@ func NewDriver(name string, min, max int) *Driver {
 	physics := PhysicsComponent{
 		Driver: driver,
 	}
+	pits := PitStopComponent{
+		Driver: driver,
+	}
+	tyresComp := TyresComponent{
+		Driver: driver,
+	}
+
+	components = append(components, &tyresComp)
+	components = append(components, &pits)
 	components = append(components, &physics)
 
 	driver.Components = components

@@ -24,6 +24,7 @@ func (g *GameLogic) Update(game *Game) {
 	g.checkFastestLap(drivers)
 	g.checkFastestCurrentLap(drivers)
 
+	// calculate Diff time between drivers
 	for index, driver := range game.Drivers {
 		if index == 0 {
 			driver.PrevDriver = nil
