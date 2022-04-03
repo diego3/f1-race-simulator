@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/diego3/golang-handson/concurrency/f1/gamelogic"
+	"github.com/diego3/golang-handson/concurrency/f1/network"
 )
 
 func init() {
@@ -14,5 +15,7 @@ func init() {
 func main() {
 	game := gamelogic.Game{}
 	game.Boot()
-	game.GameLoop()
+	go game.GameLoop()
+
+	network.WebServer()
 }
