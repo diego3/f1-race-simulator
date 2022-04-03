@@ -48,3 +48,26 @@ func createTyresCompounds() map[int]Tyre {
 	tyreMap[HARD_COMPOUND] = Tyre{Compound: "Hard", Grip: 50, Age: 0, Color: color.Bold}
 	return tyreMap
 }
+
+/*
+func createRace(name string) *Race {
+	prixMap := make(map[string]*Race)
+
+	dryType := Random(1, 2)
+	var conditions []WeatherCondition
+	cond1 := WeatherCondition{Temperature: Random(19, 40), ChangeLap: 0}
+	cond2 := WeatherCondition{Temperature: Random(15, 30), ChangeLap: Random(30, 71)}
+	conditions = append(conditions, cond1)
+	conditions = append(conditions, cond2)
+
+	monaco := &Race{
+		Name:              "Mônaco",
+		Laps:              71,
+		WeatherConditions: conditions,
+		Weather:           dryType,
+	}
+
+	prixMap[MONACO_GRAND_PRIX] = monaco
+
+	return prixMap[name]
+}*/
