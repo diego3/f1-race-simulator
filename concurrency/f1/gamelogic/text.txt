@@ -1,0 +1,11 @@
+* Game State and Data Structures
+* Physics and collision 
+* Events
+* Process Manager
+* Command Interpreter
+
+- receives game commands????
+
+- sends event games
+
+- should be smart enough to do some sanity checking on impossible commands

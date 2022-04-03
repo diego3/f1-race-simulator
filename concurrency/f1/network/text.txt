@@ -1,0 +1,5 @@
+- receives event games from gamelogic
+- sent back game commands to gamelogic
+
+- multiple events should be sent together as one packet. 
+    If the packet is large enough, it should be compressed to save bandwidth.
