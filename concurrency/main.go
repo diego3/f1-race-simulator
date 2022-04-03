@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	v2 "github.com/diego3/golang-handson/concurrency/f1/v2"
+	"github.com/diego3/golang-handson/concurrency/f1/gamelogic"
 )
 
 func init() {
@@ -12,7 +12,7 @@ func init() {
 }
 
 func main() {
-	game := v2.Game{}
+	game := gamelogic.Game{}
 	game.Boot()
 	game.GameLoop()
 }

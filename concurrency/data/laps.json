@@ -2,172 +2,181 @@
 	{
 		"Lap": 2,
 		"Pos": "1",
-		"DriverName": "LEC",
-		"Tyre": "Medium(1)",
+		"DriverName": "HAM",
+		"Tyre": "Soft(1)",
 		"Diff": "0.000",
-		"Time": "1.092",
-		"CurrentTime": "1.092"
+		"Time": "1.060",
+		"CurrentTime": "1.060"
 	},
 	{
 		"Lap": 2,
 		"Pos": "2",
-		"DriverName": "GAS",
+		"DriverName": "SAI",
 		"Tyre": "Medium(1)",
-		"Diff": "0.045",
-		"Time": "1.137",
-		"CurrentTime": "1.137"
+		"Diff": "0.070",
+		"Time": "1.130",
+		"CurrentTime": "1.130"
 	},
 	{
 		"Lap": 2,
 		"Pos": "3",
-		"DriverName": "HAM",
-		"Tyre": "Soft(1)",
-		"Diff": "0.032",
-		"Time": "1.169",
-		"CurrentTime": "1.169"
+		"DriverName": "VER",
+		"Tyre": "Hard(1)",
+		"Diff": "0.040",
+		"Time": "1.170",
+		"CurrentTime": "1.170"
 	},
 	{
 		"Lap": 2,
 		"Pos": "4",
-		"DriverName": "SAI",
-		"Tyre": "Hard(1)",
-		"Diff": "0.027",
-		"Time": "1.196",
-		"CurrentTime": "1.196"
+		"DriverName": "PER",
+		"Tyre": "Soft(1)",
+		"Diff": "0.003",
+		"Time": "1.173",
+		"CurrentTime": "1.173"
 	},
 	{
 		"Lap": 2,
 		"Pos": "5",
-		"DriverName": "VER",
-		"Tyre": "Hard(1)",
-		"Diff": "0.022",
-		"Time": "1.218",
-		"CurrentTime": "1.218"
+		"DriverName": "LEC",
+		"Tyre": "Medium(1)",
+		"Diff": "0.024",
+		"Time": "1.197",
+		"CurrentTime": "1.197"
 	},
 	{
 		"Lap": 2,
 		"Pos": "6",
 		"DriverName": "OCO",
-		"Tyre": "Hard(1)",
-		"Diff": "0.070",
-		"Time": "1.288",
-		"CurrentTime": "1.288"
+		"Tyre": "Soft(1)",
+		"Diff": "0.116",
+		"Time": "1.313",
+		"CurrentTime": "1.313"
 	},
 	{
 		"Lap": 2,
 		"Pos": "7",
-		"DriverName": "ALB",
-		"Tyre": "Medium(1)",
-		"Diff": "0.003",
-		"Time": "1.291",
-		"CurrentTime": "1.291"
+		"DriverName": "ALO",
+		"Tyre": "Soft(1)",
+		"Diff": "0.021",
+		"Time": "1.334",
+		"CurrentTime": "1.334"
 	},
 	{
 		"Lap": 2,
 		"Pos": "8",
-		"DriverName": "BOT",
-		"Tyre": "Hard(1)",
-		"Diff": "0.054",
-		"Time": "1.345",
-		"CurrentTime": "1.345"
+		"DriverName": "ALB",
+		"Tyre": "Soft(1)",
+		"Diff": "0.003",
+		"Time": "1.337",
+		"CurrentTime": "1.337"
 	},
 	{
 		"Lap": 2,
 		"Pos": "9",
-		"DriverName": "RIC",
+		"DriverName": "GAS",
 		"Tyre": "Medium(1)",
-		"Diff": "0.029",
+		"Diff": "0.037",
 		"Time": "1.374",
 		"CurrentTime": "1.374"
 	},
 	{
 		"Lap": 2,
 		"Pos": "10",
-		"DriverName": "ALO",
+		"DriverName": "LAT",
 		"Tyre": "Medium(1)",
-		"Diff": "0.097",
-		"Time": "1.471",
-		"CurrentTime": "1.471"
-	},
-	{
+		"Diff": "0.071",
+		"Time": "1.445",
+		"CurrentTime": "1.445"
+	}
+]	{
 		"Lap": 2,
 		"Pos": "11",
-		"DriverName": "RUS",
-		"Tyre": "Soft(1)",
-		"Diff": "0.013",
-		"Time": "1.484",
-		"CurrentTime": "1.484"
+		"DriverName": "BOT",
+		"Tyre": "Hard(1)",
+		"Diff": "0.101",
+		"Time": "1.546",
+		"CurrentTime": "1.546"
 	},
 	{
 		"Lap": 2,
 		"Pos": "12",
 		"DriverName": "ZOU",
 		"Tyre": "Soft(1)",
-		"Diff": "0.016",
-		"Time": "1.500",
-		"CurrentTime": "1.500"
+		"Diff": "0.038",
+		"Time": "1.584",
+		"CurrentTime": "1.584"
 	},
 	{
 		"Lap": 2,
 		"Pos": "13",
-		"DriverName": "LAT",
+		"DriverName": "STR",
 		"Tyre": "Hard(1)",
-		"Diff": "0.001",
-		"Time": "1.501",
-		"CurrentTime": "1.501"
+		"Diff": "0.034",
+		"Time": "1.618",
+		"CurrentTime": "1.618"
 	},
 	{
 		"Lap": 2,
 		"Pos": "14",
-		"DriverName": "PER",
-		"Tyre": "Hard(1)",
-		"Diff": "0.002",
-		"Time": "1.503",
-		"CurrentTime": "1.503"
+		"DriverName": "RIC",
+		"Tyre": "Soft(1)",
+		"Diff": "0.035",
+		"Time": "1.653",
+		"CurrentTime": "1.653"
 	},
 	{
 		"Lap": 2,
 		"Pos": "15",
-		"DriverName": "TIS",
-		"Tyre": "Soft(1)",
-		"Diff": "0.021",
-		"Time": "1.524",
-		"CurrentTime": "1.524"
+		"DriverName": "NOR",
+		"Tyre": "Hard(1)",
+		"Diff": "0.007",
+		"Time": "1.660",
+		"CurrentTime": "1.660"
 	},
 	{
 		"Lap": 2,
 		"Pos": "16",
-		"DriverName": "NOR",
+		"DriverName": "MAG",
 		"Tyre": "Medium(1)",
-		"Diff": "0.153",
-		"Time": "1.677",
-		"CurrentTime": "1.677"
-	},
-	{
-		"Lap": 2,
-		"Pos": "17",
-		"DriverName": "HUL",
-		"Tyre": "Soft(1)",
-		"Diff": "0.005",
+		"Diff": "0.022",
 		"Time": "1.682",
 		"CurrentTime": "1.682"
 	},
 	{
 		"Lap": 2,
-		"Pos": "18",
-		"DriverName": "MAG",
+		"Pos": "17",
+		"DriverName": "RUS",
 		"Tyre": "Hard(1)",
-		"Diff": "0.008",
-		"Time": "1.690",
-		"CurrentTime": "1.690"
+		"Diff": "0.020",
+		"Time": "1.702",
+		"CurrentTime": "1.702"
+	},
+	{
+		"Lap": 2,
+		"Pos": "18",
+		"DriverName": "HUL",
+		"Tyre": "Medium(1)",
+		"Diff": "0.040",
+		"Time": "1.742",
+		"CurrentTime": "1.742"
 	}
 ]	{
 		"Lap": 2,
 		"Pos": "19",
 		"DriverName": "MIC",
+		"Tyre": "Soft(1)",
+		"Diff": "0.071",
+		"Time": "1.813",
+		"CurrentTime": "1.813"
+	},
+	{
+		"Lap": 2,
+		"Pos": "20",
+		"DriverName": "TIS",
 		"Tyre": "Hard(1)",
-		"Diff": "0.023",
-		"Time": "1.713",
-		"CurrentTime": "1.713"
+		"Diff": "0.000",
+		"Time": "1.820",
+		"CurrentTime": "1.820"
 	}
 ]

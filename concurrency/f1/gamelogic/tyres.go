@@ -1,4 +1,4 @@
-package v2
+package gamelogic
 
 const SOFT_COMPOUND = 0
 const MEDIUM_COMPOUND = 1

@@ -1,4 +1,4 @@
-package v2
+package gamelogic
 
 type GameObject interface {
 	Initialize(game *Game)
