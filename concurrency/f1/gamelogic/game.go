@@ -7,13 +7,19 @@ import (
 	"time"
 
 	"github.com/TwiN/go-color"
+	"github.com/diego3/golang-handson/concurrency/f1/application"
+	"github.com/diego3/golang-handson/concurrency/f1/network"
 )
+
+var eventManager *application.EventManager
 
 type Game struct {
 	LapDuration int //seconds
 	MaxLaps     int
 	Drivers     []*Driver
 	GameLogic   GameLogic
+
+	NextWorkManager *network.NetworkManager
 
 	// this is the main ideia
 	GameObjects []GameObject
@@ -25,6 +31,8 @@ func (g *Game) Boot() {
 	g.LapDuration = 6
 	g.GameLogic = GameLogic{Lap: 1}
 	g.MaxLaps = 71
+	eventManager = application.NewEventManager()
+	eventManager.Register(network.OnLapSimulatedListener, application.EVENT_DRIVER_LAP_SIMULATED)
 
 	for _, gameObject := range g.GameObjects {
 		gameObject.Initialize(g)
@@ -39,6 +47,7 @@ func (g *Game) GameLoop() {
 
 		time.Sleep(time.Duration(g.LapDuration) * time.Second)
 
+		// todo trigger EVENT_RACE_FINISHED
 		// deve ter um jeito disso não ficar aqui!!!
 		if g.GameLogic.Lap == g.MaxLaps {
 			fmt.Printf("\nPODIUM:\n")

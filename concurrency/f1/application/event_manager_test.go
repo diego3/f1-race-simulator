@@ -20,11 +20,25 @@ func (f *FakeCar) TakeDamage(eventData interface{}) {
 	f.damage += damageObjt.Damage
 }
 
-func TakeDamage2(value any) {
-	fmt.Println("2take damage", value)
+func TestEventManager(t *testing.T) {
+	manager := NewEventManager()
+	event := Event{
+		Type: EVENT_A,
+		Data: DamageEventData{
+			Name:   "Max Verstappen",
+			Damage: 20,
+		},
+	}
+	car := FakeCar{damage: 0}
+	manager.Register(car.TakeDamage, EVENT_A)
+	manager.Queue(event)
+	manager.Update()
+	if car.damage != 20 {
+		t.Fatal("Failed, expected damage not match", car.damage)
+	}
 }
 
-func TestEventManager(t *testing.T) {
+func TestEventManager2(t *testing.T) {
 	manager := NewEventManager()
 	event := Event{
 		Type: EVENT_A,

@@ -23,13 +23,6 @@ type Event struct {
 	Data interface{}
 }
 
-type EventType int
-
-const (
-	EVENT_A = 1
-	EVENT_B = 2
-)
-
 func (e *EventManager) Register(consumer func(interface{}), eventType EventType) {
 	consumerList := e.Consumers[eventType]
 	consumerList = append(consumerList, consumer)

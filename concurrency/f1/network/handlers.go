@@ -7,6 +7,9 @@ import (
 	"github.com/gorilla/websocket"
 )
 
+type NetworkManager struct {
+}
+
 var upgradeConnection = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
@@ -126,4 +129,8 @@ func GetUserNameList() []string {
 		userList = append(userList, client)
 	}
 	return userList
+}
+
+func OnLapSimulatedListener(eventData interface{}) {
+
 }

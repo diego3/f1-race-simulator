@@ -15,6 +15,7 @@ type GameLogic struct {
 	Laps              []Lap
 	FastestCurrentLap *Driver
 	SlowestCurrentLap *Driver
+	GameState         int
 }
 
 func (g *GameLogic) Update(game *Game) {
