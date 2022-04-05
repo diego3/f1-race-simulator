@@ -39,14 +39,35 @@ func (e *EventManager) Queue(event Event) {
 	}
 }
 
+func (e *EventManager) getActiveQueue() []Event {
+	// switch between queues
+	if e.CurrentActiveQueue == 0 {
+		return e.Queue0
+	}
+	return e.Queue1
+}
+
+func (e *EventManager) clearQueue(queueNumber int) {
+	var empty []Event
+	if queueNumber == 0 {
+		e.Queue0 = empty
+	}
+	if queueNumber == 1 {
+		e.Queue1 = empty
+	}
+}
+
+func (e *EventManager) advanceNextQueue() {
+	e.CurrentActiveQueue = (e.CurrentActiveQueue + 1) % 2
+}
+
 func (e *EventManager) Update() {
-	// call all the listeners/consumers
-	fmt.Println(e.Consumers)
-	fmt.Println("queue-0", e.Queue0)
-	fmt.Println("queue-1", e.Queue1)
+	activeQueue := e.getActiveQueue()
+	lastActiveQueue := e.CurrentActiveQueue
+	e.advanceNextQueue()
 
 	// for each event: find consumers by eventType to call they registered func
-	for _, evt := range e.Queue0 {
+	for _, evt := range activeQueue {
 		listeners := e.Consumers[evt.Type]
 		if len(listeners) == 0 {
 			fmt.Println("Zero listeners for eventType", evt.Type)
@@ -56,5 +77,6 @@ func (e *EventManager) Update() {
 			callbackFunc(evt.Data)
 		}
 	}
-	e.CurrentActiveQueue = (e.CurrentActiveQueue + 1) % 2
+
+	e.clearQueue(lastActiveQueue)
 }

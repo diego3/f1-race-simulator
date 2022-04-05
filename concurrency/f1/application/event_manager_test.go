@@ -20,7 +20,7 @@ func (f *FakeCar) TakeDamage(eventData interface{}) {
 	f.damage += damageObjt.Damage
 }
 
-func TestEventManager(t *testing.T) {
+func TestEventManagerSimpleEvent(t *testing.T) {
 	manager := NewEventManager()
 	event := Event{
 		Type: EVENT_A,
@@ -35,12 +35,15 @@ func TestEventManager(t *testing.T) {
 	manager.Update()
 	if car.damage != 20 {
 		t.Fatal("Failed, expected damage not match", car.damage)
+	}
+	if len(manager.Queue0) > 0 {
+		t.Fatal("Failed, queue should be empty", len(manager.Queue0))
 	}
 }
 
-func TestEventManager2(t *testing.T) {
+func TestEventManagerWithRepeatedEvents(t *testing.T) {
 	manager := NewEventManager()
-	event := Event{
+	event1 := Event{
 		Type: EVENT_A,
 		Data: DamageEventData{
 			Name:   "Max Verstappen",
@@ -49,9 +52,53 @@ func TestEventManager2(t *testing.T) {
 	}
 	car := FakeCar{damage: 0}
 	manager.Register(car.TakeDamage, EVENT_A)
-	manager.Queue(event)
+
+	manager.Queue(event1)
+	manager.Queue(event1)
+
 	manager.Update()
-	if car.damage != 20 {
+	if car.damage != 40 {
 		t.Fatal("Failed, expected damage not match", car.damage)
+	}
+	if len(manager.Queue0) > 0 {
+		t.Fatal("Failed, queue should be empty", len(manager.Queue0))
+	}
+}
+
+func TestEventManagerForcingQueueCircuit(t *testing.T) {
+	manager := NewEventManager()
+	event1 := Event{
+		Type: EVENT_A,
+		Data: DamageEventData{
+			Name:   "Event1",
+			Damage: 10,
+		},
+	}
+
+	var damageTotal int = 0
+	onDamageListener := func(event interface{}) {
+		damageEvt := event.(DamageEventData)
+
+		damageTotal += damageEvt.Damage
+		event2 := Event{
+			Type: EVENT_A,
+			Data: DamageEventData{
+				Name:   "Listener-Event",
+				Damage: 10,
+			},
+		}
+		manager.Queue(event2)
+	}
+
+	manager.Register(onDamageListener, EVENT_A)
+
+	manager.Queue(event1)
+
+	manager.Update() // process queue0
+	manager.Update() // process queue1
+	manager.Update() // process queue0
+
+	if damageTotal != 30 {
+		t.Fatal("Damage Total expected = 30, got = ", damageTotal)
 	}
 }

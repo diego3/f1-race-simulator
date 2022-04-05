@@ -43,3 +43,48 @@ type WeatherCondition struct {
 	DryFactor   int // 0=clear 100=rain
 	ChangeLap   int
 }
+
+type Car struct {
+	Engine          Engine
+	Tyres           []Tyre
+	AeroConfig      AeroConfig
+	CurrentVelocity int
+}
+
+func (c *Car) Velocity() {
+	// use engine + tyres + aero
+	c.CurrentVelocity = 0
+}
+
+type AeroConfig struct {
+	Front int //higher more fast at streight sectors, lower more fast at turn sectors
+	Rear  int
+}
+
+type Engine struct {
+	ActorId     string
+	Temperature int
+	MinTemp     int
+	MaxTemp     int
+	Batery      Batery
+	Life        int // 100 is healthy
+}
+
+type Batery struct {
+	MaxCharge     int
+	CurrentCharge int
+	TimeToRecover int
+	IsOn          bool
+}
+
+type Track struct {
+	Sectors []TrackSector
+}
+
+const SECTOR_TYPE_TURN = 1
+const SECTOR_TYPE_STREIGHT = 2
+
+type TrackSector struct {
+	Type      int
+	IsDRSZone bool
+}
