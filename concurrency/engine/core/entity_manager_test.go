@@ -5,8 +5,8 @@ import "testing"
 func TestGetByNameFunction(t *testing.T) {
 	manager := NewEntityManager()
 
-	boss1 := RobotBoss{Name: "boss1"}
-	manager.AddEntity(boss1, "boss1")
+	boss1 := NewActor("boss1")
+	manager.AddEntity(*boss1)
 
 	boss1Get := manager.GetByName("boss1")
 	if boss1Get == nil {
@@ -15,18 +15,33 @@ func TestGetByNameFunction(t *testing.T) {
 	//manager.LoadFromJson("filename.json")
 }
 
-type RobotBoss struct {
-	Name string
+func TestNewActor(t *testing.T) {
+	manager := NewEntityManager()
+
+	boss1 := NewActor("   ")
+	manager.AddEntity(*boss1)
+
+	boss1Get := manager.GetByName("boss1")
+	if boss1Get != nil {
+		t.Fatal("Excepted empty actor")
+	}
 }
 
-func (r RobotBoss) Initialize(game *Game) {
+func TestAddComponent(t *testing.T) {
+	manager := NewEntityManager()
 
-}
+	boss1 := NewActor("boss1")
+	transform := NewTransform2D(0, 0)
+	boss1.AddComponent(transform)
 
-func (r RobotBoss) Update(game *Game) {
+	manager.AddEntity(*boss1)
 
-}
+	boss1Get := manager.GetByName("boss1")
+	if boss1Get == nil {
+		t.Fatal("Excepted boss1 instance, but it wasnt found")
+	}
 
-func (r RobotBoss) Render(game *Game) {
-
+	if len(boss1Get.Components) != 1 {
+		t.Fatal("Expected 1 component, bug result wast = ", len(boss1.Components))
+	}
 }
