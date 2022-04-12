@@ -4,7 +4,7 @@ type TyresComponent struct {
 	Driver *Driver
 }
 
-func (t *TyresComponent) Update(game *Game) {
+func (t *TyresComponent) Update() {
 	var tyreTime int = 0
 
 	t.Driver.Tyres.Age++

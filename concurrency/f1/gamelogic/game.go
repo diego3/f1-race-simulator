@@ -7,11 +7,13 @@ import (
 	"time"
 
 	"github.com/TwiN/go-color"
-	"github.com/diego3/golang-handson/concurrency/f1/application"
+	"github.com/diego3/golang-handson/concurrency/engine/application"
+	"github.com/diego3/golang-handson/concurrency/engine/core"
 	"github.com/diego3/golang-handson/concurrency/f1/network"
 )
 
 var eventManager *application.EventManager
+var entityManager *core.EntityManager
 
 type Game struct {
 	LapDuration int //seconds
@@ -22,7 +24,7 @@ type Game struct {
 	NextWorkManager *network.NetworkManager
 
 	// this is the main ideia
-	GameObjects []GameObject
+	GameObjects []core.Actor
 }
 
 func (g *Game) Boot() {
@@ -31,12 +33,14 @@ func (g *Game) Boot() {
 	g.LapDuration = 6
 	g.GameLogic = GameLogic{Lap: 1}
 	g.MaxLaps = 71
+
+	entityManager = core.NewEntityManager()
 	eventManager = application.NewEventManager()
 	eventManager.Register(network.OnLapSimulatedListener, application.EVENT_DRIVER_LAP_SIMULATED)
 
-	for _, gameObject := range g.GameObjects {
-		gameObject.Initialize(g)
-	}
+	//for _, gameObject := range g.GameObjects {
+	//	gameObject.Initialize(g)
+	//}
 }
 
 func (g *Game) GameLoop() {

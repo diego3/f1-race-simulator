@@ -9,7 +9,7 @@ type Tyre struct {
 	Grip     int
 	Age      int
 	Color    string
-	Life     int // 100 is healthy
+	Damage   int // 0 is healthy
 }
 
 type PitStop struct {

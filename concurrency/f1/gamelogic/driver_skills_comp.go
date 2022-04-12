@@ -4,7 +4,7 @@ type SkillsComponent struct {
 	Driver *Driver
 }
 
-func (s *SkillsComponent) Update(game *Game) {
+func (s *SkillsComponent) Update() {
 	// how much aggresive? or just trying to avoid tyres damage?
 
 	// how much "submisse" to teams commands?

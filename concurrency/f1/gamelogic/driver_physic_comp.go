@@ -9,7 +9,7 @@ type PhysicsComponent struct {
 	Driver *Driver
 }
 
-func (p *PhysicsComponent) Update(game *Game) {
+func (p *PhysicsComponent) Update() {
 	// todo: simulate driver crash and safety car
 
 	newMin := p.Driver.Min + p.Driver.MinCalculated

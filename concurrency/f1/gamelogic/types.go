@@ -1,15 +1,5 @@
 package gamelogic
 
-type GameObject interface {
-	Initialize(game *Game)
-	Update(game *Game)
-	Render(game *Game)
-}
-
-type Component interface {
-	Update(game *Game)
-}
-
 // todo: move this guys to its files
 const DRY = 1
 const WET = 2
@@ -48,6 +38,7 @@ type Car struct {
 	Engine          Engine
 	Tyres           []Tyre
 	AeroConfig      AeroConfig
+	Weight          int // greater less velocity
 	CurrentVelocity int
 }
 
@@ -78,7 +69,10 @@ type Batery struct {
 }
 
 type Track struct {
-	Sectors []TrackSector
+	Sectors          []TrackSector
+	Grip             int
+	TyreDamageFactor int //greater more the tyres take damage
+	Temperature      int //more hot, better for soft tyres
 }
 
 const SECTOR_TYPE_TURN = 1
