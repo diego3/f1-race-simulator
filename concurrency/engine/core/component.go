@@ -12,6 +12,7 @@ type ActorComponent struct {
 type Component interface {
 	Initialize()
 	Update()
+	GetName() string
 }
 
 func (ac ActorComponent) Initialize() {

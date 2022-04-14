@@ -20,3 +20,7 @@ func (r Transform2DComp) Initialize() {
 func (r Transform2DComp) Update() {
 	fmt.Println("Transform2DComp::Update")
 }
+
+func (r Transform2DComp) GetName() string {
+	return "Transform2D"
+}

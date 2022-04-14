@@ -14,8 +14,7 @@ func NewActor(name string) *Actor {
 }
 
 func (a *Actor) AddComponent(component Component) {
-	// ????
-	a.Components[""] = component
+	a.Components[component.GetName()] = component
 }
 
 func (a *Actor) GetComponent(name string) Component {
